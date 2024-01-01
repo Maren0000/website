@@ -2,6 +2,6 @@ _site
 .sass-cache
 .jekyll-metadata
 Gemfile.lock
-_test
+_posts/test
 _pages/wip
 _posts/wip
