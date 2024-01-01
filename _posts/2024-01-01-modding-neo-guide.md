@@ -17,6 +17,8 @@ A few things to note:
 1. This guide focuses on modding the base assets of the game. The steps here should theoretically work across all 3 versions on PS4, Switch, and PC. But for PS4 and Switch, you will need to figure out how to modify the NSP and PKG files on your own. There are other guides for how to do this.
 2. This is a Windows based guide, so you'll need a PC to create your own mods.
 
+![image-center](/assets/images/neo-modding-guide/example.png){: .align-center}
+
 # Prerequisites
 Before starting, you'll need to install a list of required and recommended programs:
 1. UABEA for modifing the Unity bundle files (Required)
