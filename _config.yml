@@ -18,9 +18,9 @@ title_separator: |
 email:
 description: >- # this means to ignore newlines until "baseurl:"
   A place where I dump my ideas and projects.
-twitter_username: username
-github_username: username
-minimal_mistakes_skin: neon
+#twitter_username: username
+#github_username: username
+minimal_mistakes_skin: dark
 search: true
 
 # Build settings
@@ -59,20 +59,20 @@ plugins:
 author:
   name   : "Maren"
   avatar : "/assets/images/bio-photo.jpg"
-  bio    : "My awesome biography constrained to a sentence or two goes here."
+  bio    : "Random guy on the internet interested in programming and art. Also plays way too many video games and watches too much anime."
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      url: "https://"
+      url: "https://maren0000.github.io/website/"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
+      url: "https://twitter.com/Maren_GG"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      url: "https://github.com/Maren0000"
+    - label: "Backlogged"
+      icon: "fas fa-fw fa-gamepad-alt"
+      url: "https://www.backloggd.com/u/MarenGG/"
 
 #footer:
 #  links:
@@ -112,3 +112,5 @@ category_archive:
 tag_archive:
   type: liquid
   path: /tags/
+atom_feed:
+  hide: true
