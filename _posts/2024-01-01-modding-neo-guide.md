@@ -11,7 +11,7 @@ toc: true
 toc_label: "NEO Modding"
 toc_icon: "cog"
 header:
-  image: /assets/images/neo_logo.jpg
+  image: /assets/images/neo-modding-guide/neo_logo.jpg
 ---
 
 It seems no one has made any good documentaion on how to mod NEO yet, so I decided to make a guide myself for the rest of the community. Hopefully this will lower the barrier of entry and more people get interested in modding NEO.
