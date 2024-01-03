@@ -12,7 +12,7 @@ toc_label: "NEO Modding"
 toc_icon: "cog"
 ---
 
-For a long while, no one has made a good documentaion on how to mod NEO. I decided that I should make one so that hopefully more people get the chance to make some new and interesting content for the game.
+For a long while, no one has made any good documentaion on how to mod NEO. I decided that I should make one so that hopefully more people get the chance to make some new and interesting content for the game.
 A few things to note:
 1. This guide focuses on modding the base assets of the game. The steps here should theoretically work across all 3 versions on PS4, Switch, and PC. But for PS4 and Switch, you will need to figure out how to extract and modify the NSP and PKG files on your own. There are other guides for how to do this online.
 2. This is a Windows based guide, so you'll need a PC to create your own mods.
@@ -62,14 +62,37 @@ UABEA also supports compressing the AssetBundles. While this is not required to 
 As with step 0, this is only needed for the PC version. **Skip this step** if you are modding the console versions.
 {: .notice--warning}
 
-Although Scramble claims it supports re-encrypting NEO's files, this feature usually fails with modified files in my experience. You can try it on your own, but if it doesn't work then you will need to use OpenSSL.
+Although Scramble claims it supports re-encrypting unity3d files, this feature usually fails with modified files in my experience. You can try it on your own, but if it doesn't work then you will need to use OpenSSL.
 {: .notice--danger}
 
-For this step, we'll be using OpenSSL
+For this step, we'll be using OpenSSL. You can use the command to re-encrypt any of the Unity files with the key and IV:
+```openssl.exe aes-128-cbc -e -in <input_file> -out <output_file> -K 6d6b3a39747a785752467d4a707a7732 -iv 4e46586a6571286e3a33672738263d3b```
+
+If you have multiple files you want to encrypt, you can use [this batch script][OpenSSL-Script]. Just drag and drop the files on the script and a new folder named "encrypted" will be made with all the encrypted files.
+{: .notice--success}
+
+## Step 3: Replace with the modifed AssetBundles
+Once you are done with all of the above, you can finally replace the files in `NEO The World Ends with You_Data\StreamingAssets\Assets`. Be sure to use the same names and extension so the game can still recognize the bundles.
+
+# Modifing the USM files
+NEO uses USM CriWare files for all the pre-rendered cutscenes in the game. You can create new USM files using WannaCRI.
+
+**NOTE:** WannaCRI currently only supports video formats. It *does not* currently support making USMs with audio, so keep that in mind.
+{: .notice--warning}
+
+## Step 1: Get/Create a video file that WannaCRI supports
+WannaCRI only supports 2 video formats, either H.264 or VP9. NEO should support either one, so pick the one that's easier for you. The VP9 video must be in .ivf format.
+
+## Step 2: Create the encrypted USM
+Once you have a video that WannaCRI supports, you can create a new USM file using the following command:
+```wannacri createusm <path_to_video_file> --key 0xBD86C0EE8C7342```
+
+## Step 3: Replace with the modifed USM
+Once WannaCRI finishes creating the video file, you can then replace any of the USMs in `NEO The World Ends with You_Data\StreamingAssets\Assets\cri\movie`.
 
 [UABEA]: https://github.com/nesrak1/UABEA
 [Scramble]: https://github.com/supremetakoyaki/Scramble
 [WannaCRI]: https://github.com/donmai-me/WannaCRI
 [AssetStudio]: https://github.com/Perfare/AssetStudio
 [OpenSSL]: https://wiki.openssl.org/index.php/Binaries
-[OpenSSL-Script]: 
+[OpenSSL-Script]: https://maren0000.github.io/website/assets/tools/NEO_enc.bat
