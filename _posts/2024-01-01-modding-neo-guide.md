@@ -10,12 +10,22 @@ tags:
 toc: true
 toc_label: "NEO Modding"
 toc_icon: "cog"
+header:
+  image: /assets/images/neo_logo.jpg
 ---
 
-For a long while, no one has made any good documentaion on how to mod NEO. I decided that I should make one so that hopefully more people get the chance to make some new and interesting content for the game.
-A few things to note:
-1. This guide focuses on modding the base assets of the game. The steps here should theoretically work across all 3 versions on PS4, Switch, and PC. But for PS4 and Switch, you will need to figure out how to extract and modify the NSP and PKG files on your own. There are other guides for how to do this online.
-2. This is a Windows based guide, so you'll need a PC to create your own mods.
+It seems no one has made any good documentaion on how to mod NEO yet, so I decided to make a guide myself for the rest of the community. Hopefully this will lower the barrier of entry and more people get interested in modding NEO.
+
+{% capture notice-text %}
+* This guide focuses on modding the base assets of the game. The steps here should theoretically work across all 3 versions on PS4, Switch, and PC. But for PS4 and Switch, you will need to figure out how to extract and modify the NSP and PKG files on your own. There are other guides for how to do this online.
+* This is a Windows based guide, so you'll need a PC to create your own mods.
+{% endcapture %}
+
+<div class="notice--info">
+  <h4 class="no_toc">A few things to note:</h4>
+  {{ notice-text | markdownify }}
+</div>
+
 
 # Pre-requisites
 Before starting, you'll need to install a list of required and recommended programs:
