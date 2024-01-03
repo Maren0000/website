@@ -1,5 +1,6 @@
 ---
 title: "Guide for modding NEO TWEWY's assets"
+description: "Short guide for modifing NEO's Unity3d and USM files"
 date: 2024-01-02T15:34:30-04:00
 categories:
   - Tutorial
