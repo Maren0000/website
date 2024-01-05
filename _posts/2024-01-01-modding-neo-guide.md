@@ -67,7 +67,7 @@ Although AssetStudio is not required for this, it's highly recommended as it ext
 2. Once AssetStudio shows a list of scenes, select `Asset List` and explore around for while to find what you want to change.
 3. Once you know which files you want to modify, right click on the asset and select `Show original file`. Make note of the name of the .unity3d file for later.
 
-As expected, NEO has a *bunch* of files. Use AssetStudio's search and Filter Type features to find the files you want to change quickly. The more you use it, the quicker you will learn.
+As expected, NEO has a *bunch* of files. Use AssetStudio's search and Filter Type features to find the files you want to change quickly. The more you use it, the quicker you will learn how to look for specific files.
 {: .notice--success}
 
 ## Step 2: Modify the AssetBundles
@@ -88,7 +88,7 @@ As with step 0, this is only needed for the PC version. **Skip this step** if yo
 Although Scramble claims it supports re-encrypting unity3d files, this feature usually fails with modified files in my experience. You can try it on your own, but if it doesn't work then you will need to use OpenSSL.
 {: .notice--danger}
 
-For this step, we'll be using OpenSSL. You can use the command to re-encrypt any of the Unity files with the key and IV:
+For this step, we'll be using OpenSSL. You can use this command to re-encrypt any of the Unity files with the key and IV:
 ```openssl.exe aes-128-cbc -e -in <input_file> -out <output_file> -K 6d6b3a39747a785752467d4a707a7732 -iv 4e46586a6571286e3a33672738263d3b```
 
 If you have multiple files you want to encrypt, you can use [this batch script][OpenSSL-Script]. Just drag and drop the files on the script and a new folder named "encrypted" will be made with all the encrypted files.
@@ -100,11 +100,11 @@ Once you are done with all of the above, you can finally replace the files in `N
 # Modifing the USM files
 NEO uses USM CriWare files for all the pre-rendered cutscenes in the game. You can create new USM files using WannaCRI.
 
-**NOTE:** WannaCRI currently only supports video formats. It *does not* currently support making USMs with audio, so keep that in mind.
+**NOTE:** WannaCRI currently only supports video formats. It ***does not*** support making USMs with audio, so keep that in mind.
 {: .notice--warning}
 
 ## Step 1: Get/Create a video file that WannaCRI supports
-WannaCRI only supports 2 video formats, either H.264 or VP9. NEO should support either one, so pick the one that's easier for you. The VP9 video must be in .ivf format.
+WannaCRI only supports 2 video codecs, either H.264 or VP9. NEO should support either one, so pick the one that's easier for you. VP9 video must be in `.ivf` format.
 
 ## Step 2: Create the encrypted USM
 Once you have a video that WannaCRI supports, you can create a new USM file using the following command:
@@ -116,7 +116,7 @@ Once WannaCRI finishes creating the video file, you can then replace any of the 
 {% capture usm-guide %}
 1. MOV_PSI_XXXX: The mini videos that play when you are selecting different pins.
 2. OP_wXdX and ED_wXdX: Title cards used at the start and end of each day.
-3. S109EpXX: Pre-rendered cutscenes
+3. S109EpXX: Pre-rendered cutscenes.
 4. STAFROLLXX: Credit videos.
 {% endcapture %}
 
