@@ -120,7 +120,7 @@ Once WannaCRI finishes creating the video file, you can then replace any of the 
 4. STAFROLLXX: Credit videos.
 {% endcapture %}
 
-<div class=".notice--success">
+<div class="notice--success">
   <h4 class="no_toc">Here's a mini guide on NEO's USMs:</h4>
   {{ usm-guide | markdownify }}
 </div>
