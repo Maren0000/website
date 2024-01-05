@@ -113,12 +113,17 @@ Once you have a video that WannaCRI supports, you can create a new USM file usin
 ## Step 3: Replace with the modifed USM
 Once WannaCRI finishes creating the video file, you can then replace any of the USMs in `NEO The World Ends with You_Data\StreamingAssets\Assets\cri\movie`.
 
-Here's a mini guide on NEO's USMs:
+{% capture usm-guide %}
 1. MOV_PSI_XXXX: The mini videos that play when you are selecting different pins.
 2. OP_wXdX and ED_wXdX: Title cards used at the start and end of each day.
 3. S109EpXX: Pre-rendered cutscenes
 4. STAFROLLXX: Credit videos.
-{: .notice--success}
+{% endcapture %}
+
+<div class=".notice--success">
+  <h4 class="no_toc">Here's a mini guide on NEO's USMs:</h4>
+  {{ usm-guide | markdownify }}
+</div>
 
 [UABEA]: https://github.com/nesrak1/UABEA
 [Scramble]: https://github.com/supremetakoyaki/Scramble
