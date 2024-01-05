@@ -1,7 +1,8 @@
 ---
 title: "Guide for modding NEO TWEWY's assets"
 description: "Short guide for modifing NEO's Unity3d and USM files"
-date: 2024-01-02T15:34:30-04:00
+date: 2024-01-01T15:34:30-04:00
+last_modified_at: 2024-01-05T16:16:00-04:00
 categories:
   - Tutorial
 tags:
@@ -13,6 +14,16 @@ toc_label: "NEO Modding"
 toc_icon: "cog"
 header:
   og_image: /assets/images/neo-modding-guide/neo_logo.jpg
+gallery:
+  - url: /assets/images/neo-modding-guide/text_example.png
+    image_path: /assets/images/neo-modding-guide/text_example.png
+    title: "Text replacement"
+  - url: /assets/images/neo-modding-guide/texture_example.png
+    image_path: /assets/images/neo-modding-guide/texture_example.png
+    title: "Texture replacement"
+  - url: /assets/images/neo-modding-guide/map_example.png
+    image_path: /assets/images/neo-modding-guide/map_example.png
+    title: "MasterData replacement"  
 ---
 
 It seems no one has made any good documentaion on how to mod NEO yet, so I decided to make a guide myself for the rest of the community. Hopefully this will lower the barrier of entry and more people get interested in modding NEO.
@@ -27,6 +38,7 @@ It seems no one has made any good documentaion on how to mod NEO yet, so I decid
   {{ notice-text | markdownify }}
 </div>
 
+{% include gallery id="gallery" layout="half" caption="A few example of what can be done with asset replacements." %}
 
 # Pre-requisites
 Before starting, you'll need to install a list of required and recommended programs:
@@ -61,7 +73,7 @@ As expected, NEO has a *bunch* of files. Use AssetStudio's search and Filter Typ
 ## Step 2: Modify the AssetBundles
 Once you know which .unity3d files you need to edit, you will need to open them in UABEA.
 1. Run `UABEAvalonia.exe` and drag the .unity3d files you want to modify on the window. UABEA will ask you if you want to decompress the file to a new file or memory. It's recommended to select memory if your PC can handle it.
-2. Once the file is decompressed, select the `Info` button to see the list of files in the bundle. UABEA can let you edit some basic files using the `Edit Data` button, but for other files, you will need to extract a dump first, edit the file in other program, then reimport the file using UABEA.
+2. Once the file is decompressed, select the `Info` button to see the list of files in the bundle. UABEA can let you edit some basic files using the `Edit Data` button, but for other files, you will need to extract the file through `Plugins` first, edit it in other program, then reimport the file using `Plugins` again.
 3. After editing the bundle with new assets, save it by clicking `File->Save` or using Ctrl+S.
 4. Close out of the asset info window, and `File->Save As` to a new unity3d file.
 
@@ -100,6 +112,13 @@ Once you have a video that WannaCRI supports, you can create a new USM file usin
 
 ## Step 3: Replace with the modifed USM
 Once WannaCRI finishes creating the video file, you can then replace any of the USMs in `NEO The World Ends with You_Data\StreamingAssets\Assets\cri\movie`.
+
+Here's a mini guide on NEO's USMs:
+1. MOV_PSI_XXXX: The mini videos that play when you are selecting different pins.
+2. OP_wXdX and ED_wXdX: Title cards used at the start and end of each day.
+3. S109EpXX: Pre-rendered cutscenes
+4. STAFROLLXX: Credit videos.
+{: .notice--success}
 
 [UABEA]: https://github.com/nesrak1/UABEA
 [Scramble]: https://github.com/supremetakoyaki/Scramble
