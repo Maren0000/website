@@ -38,7 +38,7 @@ It seems no one has made any good documentaion on how to mod NEO yet, so I decid
   {{ notice-text | markdownify }}
 </div>
 
-{% include gallery id="gallery" layout="half" caption="A few example of what can be done with asset replacements." %}
+{% include gallery id="gallery" layout="half" caption="A few examples of what can be done with asset replacements." %}
 
 # Pre-requisites
 Before starting, you'll need to install a list of required and recommended programs:
@@ -57,8 +57,8 @@ If you are modding the PS4 or Switch versions of the game, **you can skip this s
 
 On PC, NEO's AssetBundles are encrypted using an AES key and IV. The good news is that the Scramble save editor can decrypt all the files in a few minutes.
 1. After downloading the newest release from Github, extract and run `Scramble.exe`.
-2. You will see a `asset decrypt & re-encrypt"` button. Click it and navigate to `NEO The World Ends with You_Data\StreamingAssets\Assets` folder. Select all the files in folder and click open.
-3. You will be asked to select a new folder where Scramble will dump all the decrypted AssetBundles. Pick a folder of you choosing and wait until Scramble decrypts the files. (This can take a while if you selected a lot of files.
+2. You will see a `asset decrypt & re-encrypt` button. Click it and navigate to `NEO The World Ends with You_Data\StreamingAssets\Assets` folder. Select all the files in folder and click open.
+3. You will be asked to select a new folder where Scramble will dump all the decrypted AssetBundles. Pick a folder of your choosing and wait until Scramble decrypts the files. (This can take a while if you selected a lot of files.
 Once the decryption is finished, a prompt saying "Done." will appear.
 
 ## Step 1: Figure out which bundles to modify
