@@ -1,7 +1,7 @@
 ---
 title: "Emotion Edge Transcripts"
 description: "WIP Transcripts of Emotion Edge pages shown off during ARTNIA cafe events"
-date: 2024-04-07T22:20:45-04:00
+date: 2024-04-07T20:45:00-04:00
 categories:
   - Transcript
 tags:
