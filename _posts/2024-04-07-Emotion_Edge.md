@@ -6,9 +6,9 @@ categories:
   - Transcript
 tags:
   - TWEWY
-  - English Transcript
-  - Magazine
-  - Interview
+  - Japanese Transcript
+  - Emotion Edge
+  - Design Documents
 classes: wide
 ---
 
