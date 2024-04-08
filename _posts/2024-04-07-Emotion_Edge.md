@@ -1,5 +1,5 @@
 ---
-title: "Emotion Edge Transcript"
+title: "Emotion Edge Transcripts"
 description: "WIP Transcripts of Emotion Edge pages shown off during ARTNIA cafe events"
 date: 2024-04-07T22:20:45-04:00
 categories:
@@ -10,99 +10,9 @@ tags:
   - Emotion Edge
   - Design Documents
 classes: wide
+header:
+  og_image: /assets/images/emotion-edge/logo.webp
 ---
-
-<style>
-r { color: #FF5555 }
-b { color: #5555FF }
-</style>
-
-{% capture page1_1 %}
-[![Foo](https://pbs.twimg.com/media/Do1IBvwUwAAZF9X.jpg:orig)](Twitter)
-{% endcapture %}
-{% capture page1_2 %}
-[![Foo](https://www.famitsu.com/images/000/166/994/z_5bdc161182209.jpg)](Famitsu)
-{% endcapture %}
-
-{% capture page2_1 %}
-[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090851.jpg)](hals-game-player Hatenablog)
-{% endcapture %}
-{% capture page2_2 %}
-[![Foo](https://pbs.twimg.com/media/DoFhC3dVsAAAyS-.jpg:orig)](Twitter)
-{% endcapture %}
-
-{% capture page3_1 %}
-[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090854.jpg)](hals-game-player Hatenablog)
-{% endcapture %}
-{% capture page3_2 %}
-[![Foo](https://pbs.twimg.com/media/Do-gMNkUUAA_SoK.jpg:orig)](Twitter)
-{% endcapture %}
-
-{% capture page4_1 %}
-[![Foo](https://pbs.twimg.com/media/DoyskqfU8AAlGBL.jpg:orig)](Twitter)
-{% endcapture %}
-
-{% capture page5_1 %}
-[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090902.jpg)](hals-game-player Hatenablog)
-{% endcapture %}
-{% capture page5_2 %}
-[![Foo](https://pbs.twimg.com/media/DoJjyn-U0AAc52J.jpg:orig)](Twitter)
-{% endcapture %}
-{% capture page5_3 %}
-[![Foo](https://www.famitsu.com/images/000/166/994/z_5bdc16119eefd.jpg)](Famitsu)
-{% endcapture %}
-
-{% capture page6_1 %}
-[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090905.jpg)](hals-game-player Hatenablog)
-{% endcapture %}
-{% capture page6_2 %}
-[![Foo](https://pbs.twimg.com/media/DqgwoH2VAAAyrsl.jpg:orig)](Twitter)
-{% endcapture %}
-
-{% capture page7_1 %}
-[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090908.jpg)](hals-game-player Hatenablog)
-{% endcapture %}
-{% capture page7_2 %}
-[![Foo](https://www.famitsu.com/images/000/166/994/z_5bdc1611762a0.jpg)](Famitsu)
-{% endcapture %}
-
-{% capture page8_1 %}
-[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090911.jpg)](hals-game-player Hatenablog)
-{% endcapture %}
-{% capture page8_2 %}
-[![Foo](https://pbs.twimg.com/media/DoJjzSvUcAAjG9-.jpg:orig)](Twitter)
-{% endcapture %}
-
-{% capture page9_1 %}
-[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090914.jpg)](hals-game-player Hatenablog)
-{% endcapture %}
-{% capture page9_2 %}
-[![Foo](https://pbs.twimg.com/media/Do1IBv5UUAAd3AQ.jpg:orig)](Twitter)
-{% endcapture %}
-
-{% capture page10_1 %}
-[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090918.jpg)](hals-game-player Hatenablog)
-{% endcapture %}
-{% capture page10_2 %}
-[![Foo](https://www.famitsu.com/images/000/166/994/z_5bdc16118e943.jpg)](Twitter)
-{% endcapture %}
-
-{% capture page11_1 %}
-[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090921.jpg)](hals-game-player Hatenablog)
-{% endcapture %}
-{% capture page11_2 %}
-[![Foo](https://pbs.twimg.com/media/DqgwoyHV4AEK_O_.jpg:orig)](Twitter)
-{% endcapture %}
-
-{% capture page12_1 %}
-[![Foo](https://pbs.twimg.com/media/Do1IBv4UcAEU9b3.jpg:orig)](Twitter)
-{% endcapture %}
-{% capture page12_2 %}
-[![Foo](https://pbs.twimg.com/media/DoJjzSvUcAAjG9-.jpg:orig)](Twitter)
-{% endcapture %}
-{% capture page12_3 %}
-[![Foo](https://pbs.twimg.com/media/DqXqFGVXgAE7nw6.jpg:orig)](Twitter)
-{% endcapture %}
 
 Back in 2018, 12 Emotion Edge design documents were shown off during the TWEWY Final Remix ARTNIA Cafe event in the "Luxury Area" (which while cool, has terrible lighting conditions for cameras.). These documents include some of the earliest known design decisions for TWEWY. These documents were also shown off even earlier in 2014 during another TWEWY ARTNIA event, however this was during a private meeting event so there aren't many images from this event.
 
@@ -528,3 +438,95 @@ DSの通信機能を使って通信プレイをすることが出来ます。
   {{ page12_2 | markdownify | remove: "<p>" | remove: "</p>" }}
   {{ page12_3 | markdownify | remove: "<p>" | remove: "</p>" }}
 </figure>
+
+<style>
+r { color: #FF5555 }
+b { color: #5555FF }
+</style>
+
+{% capture page1_1 %}
+[![Foo](https://pbs.twimg.com/media/Do1IBvwUwAAZF9X.jpg:orig)](Twitter)
+{% endcapture %}
+{% capture page1_2 %}
+[![Foo](https://www.famitsu.com/images/000/166/994/z_5bdc161182209.jpg)](Famitsu)
+{% endcapture %}
+
+{% capture page2_1 %}
+[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090851.jpg)](hals-game-player Hatenablog)
+{% endcapture %}
+{% capture page2_2 %}
+[![Foo](https://pbs.twimg.com/media/DoFhC3dVsAAAyS-.jpg:orig)](Twitter)
+{% endcapture %}
+
+{% capture page3_1 %}
+[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090854.jpg)](hals-game-player Hatenablog)
+{% endcapture %}
+{% capture page3_2 %}
+[![Foo](https://pbs.twimg.com/media/Do-gMNkUUAA_SoK.jpg:orig)](Twitter)
+{% endcapture %}
+
+{% capture page4_1 %}
+[![Foo](https://pbs.twimg.com/media/DoyskqfU8AAlGBL.jpg:orig)](Twitter)
+{% endcapture %}
+
+{% capture page5_1 %}
+[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090902.jpg)](hals-game-player Hatenablog)
+{% endcapture %}
+{% capture page5_2 %}
+[![Foo](https://pbs.twimg.com/media/DoJjyn-U0AAc52J.jpg:orig)](Twitter)
+{% endcapture %}
+{% capture page5_3 %}
+[![Foo](https://www.famitsu.com/images/000/166/994/z_5bdc16119eefd.jpg)](Famitsu)
+{% endcapture %}
+
+{% capture page6_1 %}
+[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090905.jpg)](hals-game-player Hatenablog)
+{% endcapture %}
+{% capture page6_2 %}
+[![Foo](https://pbs.twimg.com/media/DqgwoH2VAAAyrsl.jpg:orig)](Twitter)
+{% endcapture %}
+
+{% capture page7_1 %}
+[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090908.jpg)](hals-game-player Hatenablog)
+{% endcapture %}
+{% capture page7_2 %}
+[![Foo](https://www.famitsu.com/images/000/166/994/z_5bdc1611762a0.jpg)](Famitsu)
+{% endcapture %}
+
+{% capture page8_1 %}
+[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090911.jpg)](hals-game-player Hatenablog)
+{% endcapture %}
+{% capture page8_2 %}
+[![Foo](https://pbs.twimg.com/media/DoJjzSvUcAAjG9-.jpg:orig)](Twitter)
+{% endcapture %}
+
+{% capture page9_1 %}
+[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090914.jpg)](hals-game-player Hatenablog)
+{% endcapture %}
+{% capture page9_2 %}
+[![Foo](https://pbs.twimg.com/media/Do1IBv5UUAAd3AQ.jpg:orig)](Twitter)
+{% endcapture %}
+
+{% capture page10_1 %}
+[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090918.jpg)](hals-game-player Hatenablog)
+{% endcapture %}
+{% capture page10_2 %}
+[![Foo](https://www.famitsu.com/images/000/166/994/z_5bdc16118e943.jpg)](Twitter)
+{% endcapture %}
+
+{% capture page11_1 %}
+[![Foo](https://cdn-ak.f.st-hatena.com/images/fotolife/h/hals_game_player/20210822/20210822090921.jpg)](hals-game-player Hatenablog)
+{% endcapture %}
+{% capture page11_2 %}
+[![Foo](https://pbs.twimg.com/media/DqgwoyHV4AEK_O_.jpg:orig)](Twitter)
+{% endcapture %}
+
+{% capture page12_1 %}
+[![Foo](https://pbs.twimg.com/media/Do1IBv4UcAEU9b3.jpg:orig)](Twitter)
+{% endcapture %}
+{% capture page12_2 %}
+[![Foo](https://pbs.twimg.com/media/DoJjzSvUcAAjG9-.jpg:orig)](Twitter)
+{% endcapture %}
+{% capture page12_3 %}
+[![Foo](https://pbs.twimg.com/media/DqXqFGVXgAE7nw6.jpg:orig)](Twitter)
+{% endcapture %}
