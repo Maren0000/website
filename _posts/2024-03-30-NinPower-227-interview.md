@@ -9,6 +9,7 @@ tags:
   - English Transcript
   - Magazine
   - Interview
+classes: wide
 header:
   og_image: /assets/images/transcripts/NinPower-04-2008/cover.jpg
 gallery:

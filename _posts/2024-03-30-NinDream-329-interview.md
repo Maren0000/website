@@ -10,9 +10,7 @@ tags:
   - Japanese Transcript
   - Magazine
   - Interview
-toc: true
-toc_label: "Interview"
-toc_icon: "cog"
+classes: wide
 header:
   og_image: /assets/images/transcripts/NinDream-10-2021/cover.jpg
 gallery:
