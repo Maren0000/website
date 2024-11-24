@@ -15,10 +15,10 @@ classes: wide
 A few days ago, I was informed that HackTheBox would run a CTF specifically for university students in my college. I've never tried a CTF compeition beofre so I thought this would be a perfect opportunity to try it for the first time! I made my account just a few hours before the start of the CTF. Since I found out about this literally a day before it started, I didn't any time to prepare, but overall I'm happy with the performance I put up considering I was doing this (mostly) on my own vs. mostly teams of 2/3 members. Here's the flags that I was able to figure out on my own:
 
 # First Category: Reversing
-The first category had two reversing challenges:
+The first category had two reversing challenges.
 ## Spelunking:
 For the first challenge, I was given a Linux executable. First thing that came to my mind is to analyze the executable in IDA to see what we were to working with. Loaded up the file and went to look at strings...
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/Pasted image 20241123165523.png" alt="">
+<img src="/assets/images/Pasted image 20241123165523.png" alt="">
 
 Well that was easy lol. Can you get this flag through running the file? idk since I didn't even try lol
 Anyways first flag got!
@@ -73,7 +73,7 @@ I couldn't actually get this flag before the end of the CTF, but I still wanted 
 <img src="{{ site.url }}{{ site.baseurl }}/assets/images/Pasted image 20241123182510.png" alt="">
 
 # Fourth Category: Forensics
-Both of the forensics challenges had Wireshark pcap files to go through
+Both of the forensics challenges had Wireshark pcap files to go through.
 ## Capture 1:
 Started from bottom to top since I thought that would be more efficient. I copied whatever seemed like it could have useful. There was an interesting base64 string in the last few packets that contained the flag.
 <img src="{{ site.url }}{{ site.baseurl }}/assets/images/Pasted image 20241123183117.png" alt="">
