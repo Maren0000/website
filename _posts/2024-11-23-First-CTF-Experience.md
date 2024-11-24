@@ -18,7 +18,7 @@ A few days ago, I was informed that HackTheBox would run a CTF specifically for 
 The first category had two reversing challenges.
 ## Spelunking:
 For the first challenge, I was given a Linux executable. First thing that came to my mind is to analyze the executable in IDA to see what we were to working with. Loaded up the file and went to look at strings...
-<img src="/assets/images/Pasted image 20241123165523.png" alt="">
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/first-ctf/Pasted image 20241123165523.png" alt="">
 
 Well that was easy lol. Can you get this flag through running the file? idk since I didn't even try lol
 Anyways first flag got!
