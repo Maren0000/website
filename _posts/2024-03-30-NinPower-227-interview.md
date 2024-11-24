@@ -72,6 +72,6 @@ We definitely considered multiplayer options, but as we moved farther along in d
 Since this was a new IP, we did have our worries until it was completed. Fortunately, it was very well-received by Japanese users, and the development team has happily heaved a big sigh of relief. There have been requests for a sequel as well, so we hope to be able to answer to that some day. I am currently involved in the development of Final Fantasy Versus XIII, but working on an original IP was definitely a very exciting and stimulating experience, so I would love to take on the challenge again in the future.
 
 # Pages
-{% include gallery id="gallery" layout="half" caption="Digital version of the pages" %}
+{% include gallery id="gallery" layout="half" caption="Scanned version of the pages (thanks to RetroMags)" %}
 
 [RM]: https://www.retromags.com/magazines/usa/nintendo-power/nintendo-power-issue-227/

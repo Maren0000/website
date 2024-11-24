@@ -39,6 +39,6 @@ TK: Players should first concentrate on becoming comfortable with the lower-scre
 **TK:** If enough users expressed interest in bringing those designs into the real world, and the pins and characters from World could successfully make that transition from the game world to the real world, events such as fashion shows, and more, may be conceivable. It would be exciting if something like this could be realized.
 
 # Pages
-{% include gallery id="gallery" layout="half" caption="Digital version of the pages" %}
+{% include gallery id="gallery" layout="half" caption="Scanned version of the pages (thanks to RetroMags)" %}
 
 [RM]: https://www.retromags.com/magazines/usa/electronic-gaming-monthly/electronic-gaming-monthly-issue-230/
