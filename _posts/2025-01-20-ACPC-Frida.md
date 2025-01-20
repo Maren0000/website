@@ -50,7 +50,7 @@ I eventually was able to find a TrollStore app called `TrollSign` which allowed 
 
 Now that we finally have a Frida setup working, we can look at the second piece of the puzzle to get it working with Unity games. [frida-il2cpp-bridge](https://github.com/vfsfitvnm/frida-il2cpp-bridge) allows us to interface with il2cpp built games with typescript code. We'll first need to setup a development folder to write our TS scripts in and then convert them to Frida JS scripts. We can do this by running these commands in Powershell.
 
-```Powershell
+{% highlight powershell linenos %}
 git clone https://github.com/oleavr/frida-agent-example.git #Download Agent Example
 cd .\frida-agent-example # Change directory
 npm install -g typescript #Install typescript
@@ -59,11 +59,11 @@ npm install --save-dev frida-il2cpp-bridge #Install frida-il2cpp-bridge
 npm install -g esbuild #Install esbuild
 echo "import 'frida-il2cpp-bridge';`nconsole.log('Rebuilded')`nIl2Cpp.perform(() => { Il2Cpp.dump() });" | Set-Content -Path .\agent\index.ts -Encoding utf8 #Create index.ts file
 esbuild agent/index.ts --bundle --outfile=il2cpp_bridge.js #Build ts to js
-```
+{% endhighlight %}
 
 If you want to have intellisense in something like VS Code, you will need to add this to your `tsconfig.json`:
 
-```JSON
+{% highlight json linenos %}
 {
   "compilerOptions": {
     "target": "es2020",
@@ -77,7 +77,7 @@ If you want to have intellisense in something like VS Code, you will need to add
         "./node_modules"
     ]
 }
-```
+{% endhighlight %}
 
 Now we are ready to start writing code in the `index.ts` file. For example, we can write code to invoke the `GenerateKey` method that we found already:
 
@@ -107,18 +107,22 @@ We can then convert this byte array to a hex key and then be able to decrypt the
 <img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118130201.png" alt="">
 <img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118130648.png" alt="">
 
-The file has be successfully decrypted. But that's not the only thing we can do with the il2cpp-bridge. I won't go too much into it here and I would recommend you check the [code snippets page](https://github.com/vfsfitvnm/frida-il2cpp-bridge/wiki/Snippets)and the issues/discussions pages on the GitHub page as there is plenty of more info to be found there, but here are a few interesting screenshots of my own code snippets and console logs to show a bit of what's possible.
+The file has be successfully decrypted. But that's not the only thing we can do with the il2cpp-bridge. I won't go too much into it here and I would recommend you check the [code snippets page](https://github.com/vfsfitvnm/frida-il2cpp-bridge/wiki/Snippets) and the issues/discussions pages on the GitHub page as there is plenty of more info to be found there, but here are a few interesting screenshots of my own code snippets and console logs to show a bit of what's possible.
 
 <img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118134144.png" alt="">
+
 Tracing a bunch of function calls with arguments and returns
 
 <img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118134230.png" alt="">
+
 Backtracing a method
 
 <img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118134406.png" alt="">
+
 Invoking a method with custom values
 
 <img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118134824.png" alt="">
+
 Creating a new instance of a class and using a custom method implementation to print a values in a struct each time the method is called
 
 ## Conclusion
