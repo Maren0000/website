@@ -2,6 +2,7 @@
 title: "Getting encryption keys during runtime using Frida"
 description: "Tutorial and showcase of Frida on non-jailbroken iOS devices"
 date: 2025-01-19T18:00:00-04:00
+last_modified_at: 2025-01-20T12:33:00-04:00
 categories:
   - Reverse Engineering
 tags:
@@ -23,11 +24,11 @@ People quickly figured out that the game had two files that were related to the 
 
 I looked into [how you can use il2cppdumper and IDA to get decompiled psudocode for Unity games before](https://maren0000.github.io/website/reverse%20engineering/Breaking-DRPG/), so I won't go over this that process again here. After looking through a bunch of the game's classes in DnSpy, I eventually found a class named `CmpsLocalPlayerStorage` that seemed to be exactly what I was looking for as it has two save file paths and a nested `XorCryptor` class.
 
-![[Pasted image 20250117143112.png]]
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250117143112.png" alt="">
 
 Seems like there is a handy `GenerateKey` function we can take a look at! Let's see what it looks like in IDA.
 
-![[Pasted image 20250117144204.png]]
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250117144204.png" alt="">
 
 Ah, well this is annoying. Unlike Pixel RPG which stored it's key as a string in Unity, ACPC seems to create a 1000 byte key at runtime using a set of Randomness functions inside the `RandomCore` class. The `Initialize` function has a set seed (`0x8A91F2BE48CCLL`) so that the final output will always be consistent every time the game is booted up, and then the game does `get_Int` from the randomness class until the 1000 byte array is filled out.
 Now, it is possible to recreate the Random functions used here by looking at the psudocode and making your own code based on that. The first person who got the key did end up doing exactly that, but since I'm not *that* good at interpreting psudocode, I decided to see if there was another possible method to getting the key. This is where Frida and the il2cpp-Frida-Bridge projects come in.
@@ -38,7 +39,7 @@ First thing to do is get [Frida](https://frida.re/) working on either an Android
 
 Since Frida on Android was failing for my use case, I ended up seeing if it was possible to use Frida on my iPad. Since it was not jailbroken, I couldn't use frida-server, but I eventually found [this tutorial on using Frida on non-jailbroken devices](https://infosecwriteups.com/unlocking-potential-exploring-frida-objection-on-non-jailbroken-devices-without-application-ed0367a84f07). I followed all the steps, and to my surprise it actually worked! Frida could hook into the game without issue!
 
-<insert image of frida hooked into game (with unityframework shown maybe)>
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250119171502.png" alt="">
 
 There is an issue with this method however, and that is you must sideload the game using [Sideloadly](https://sideloadly.io/) for Frida to work properly. There are a few downsides to this such as being able to only have 3 apps installed at once and a 7 day expiry date with a free Apple developer account, but the biggest issue is that you must have a decrypted IPA for Sideloadly to be able to install the IPA. Now although I don't have a jailbreak on my iPad, I do have the [TrollStore](https://ios.cfw.guide/installing-trollstore/) app installed which allows me to use an app like AppsDump2 to get a decrypted version of ACPC right from my device. So while this wasn't a huge issue for me, it could be harder to find a decrypted version of the app you want to hook into if you can't dump it yourself.
 
@@ -46,7 +47,9 @@ There was one thing I found interesting is that Frida would only work on apps in
 I eventually was able to find a TrollStore app called `TrollSign` which allowed you to change the entitlements of IPAs before you install them through TrollStore. Adding this `get-task-allow` entitlement to the ACPC IPA I dumped and installing it through TrollStore made the game work with Frida again. So now I didn't need to deal with the normal sideloading restrictions that come with using a free Apple developer account :>
 
 ## frida-il2cpp-bridge
+
 Now that we finally have a Frida setup working, we can look at the second piece of the puzzle to get it working with Unity games. [frida-il2cpp-bridge](https://github.com/vfsfitvnm/frida-il2cpp-bridge) allows us to interface with il2cpp built games with typescript code. We'll first need to setup a development folder to write our TS scripts in and then convert them to Frida JS scripts. We can do this by running these commands in Powershell.
+
 ```Powershell
 git clone https://github.com/oleavr/frida-agent-example.git #Download Agent Example
 cd .\frida-agent-example # Change directory
@@ -59,6 +62,7 @@ esbuild agent/index.ts --bundle --outfile=il2cpp_bridge.js #Build ts to js
 ```
 
 If you want to have intellisense in something like VS Code, you will need to add this to your `tsconfig.json`:
+
 ```JSON
 {
   "compilerOptions": {
@@ -76,6 +80,7 @@ If you want to have intellisense in something like VS Code, you will need to add
 ```
 
 Now we are ready to start writing code in the `index.ts` file. For example, we can write code to invoke the `GenerateKey` method that we found already:
+
 ```TS
 import 'frida-il2cpp-bridge';
 console.log('Frida works! Il2CPP hooking next...');
@@ -95,26 +100,27 @@ Il2Cpp.perform(() => {
 ```
 
 Then we can build the Frida script using `esbuild` command shown previously. Once we have the .js file, we can run it with Frida using this command: `frida -U -f <app_name> -l <script_name>.js`. You might need to use `%reload` command in the Frida console since `UnityFramework` might not be found on boot, but after that your script should run, and you should start seeing an output in the console log!
-![[Pasted image 20250118125712.png]]
+
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118125712.png" alt="">
 
 We can then convert this byte array to a hex key and then be able to decrypt the save file!
-![[Pasted image 20250118130201.png]]
-![[Pasted image 20250118130648.png]]
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118130201.png" alt="">
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118130648.png" alt="">
 
-The file has be successfully decrypted. But that's not the only thing we can do with the il2cpp-bridge. I won't go too much into it here and I would recommend you check the [code snippets page](https://github.com/vfsfitvnm/frida-il2cpp-bridge/wiki/Snippets)and the issues/discussions pages on the GitHub page as there is plenty of more info to be found there, but here are a few interesting screenshots of my own code snippets and console logs to show a bit of what's possible. 
+The file has be successfully decrypted. But that's not the only thing we can do with the il2cpp-bridge. I won't go too much into it here and I would recommend you check the [code snippets page](https://github.com/vfsfitvnm/frida-il2cpp-bridge/wiki/Snippets)and the issues/discussions pages on the GitHub page as there is plenty of more info to be found there, but here are a few interesting screenshots of my own code snippets and console logs to show a bit of what's possible.
 
-![[Pasted image 20250118134144.png]]
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118134144.png" alt="">
 Tracing a bunch of function calls with arguments and returns
 
-![[Pasted image 20250118134230.png]]
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118134230.png" alt="">
 Backtracing a method
 
-![[Pasted image 20250118134406.png]]
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118134406.png" alt="">
 Invoking a method with custom values
 
-![[Pasted image 20250118134824.png]]
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118134824.png" alt="">
 Creating a new instance of a class and using a custom method implementation to print a values in a struct each time the method is called
 
-
 ## Conclusion
+
 As you can probably see, there is *a lot* you can do with Frida + il2cpp bridge for Unity games. This setup using an unjailbroken iOS device has been fairly stable considering what's being done here. Since there is no jailbreak involved, most games should still run fine, but the sideloading trick does cause an issue for some games. For example, NIKKE fails to boot if sideloaded using Sideloadly at all, and a game like Blue Archive still boots, but something in the NEXON Login SDK fails and the game will quit after not being able to login into an account. So it's still not a perfect method, but for any single player games or games with less protections, this method should still work great.

@@ -2,6 +2,7 @@
 title: "Breaking DP-RPG's Asset Encryption"
 description: "Getting Disney Pixel RPG's asset encryption key through reverse engineering"
 date: 2024-10-12T22:00:00-04:00
+last_modified_at: 2025-01-20T12:32:00-04:00
 categories:
   - Reverse Engineering
 tags:
