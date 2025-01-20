@@ -81,7 +81,7 @@ If you want to have intellisense in something like VS Code, you will need to add
 
 Now we are ready to start writing code in the `index.ts` file. For example, we can write code to invoke the `GenerateKey` method that we found already:
 
-```TS
+{% highlight typescript linenos %}
 import 'frida-il2cpp-bridge';
 console.log('Frida works! Il2CPP hooking next...');
 
@@ -97,7 +97,7 @@ Il2Cpp.perform(() => {
     const key = XorClass.method("GenerateKey").invoke(); //Invoke GenerateKey method and store returned byte
     console.log("key: ", key); //Print byte
 });
-```
+{% endhighlight %}
 
 Then we can build the Frida script using `esbuild` command shown previously. Once we have the .js file, we can run it with Frida using this command: `frida -U -f <app_name> -l <script_name>.js`. You might need to use `%reload` command in the Frida console since `UnityFramework` might not be found on boot, but after that your script should run, and you should start seeing an output in the console log!
 
