@@ -1,6 +1,6 @@
 ---
 title: "Breaking DP-RPG's Asset Encryption"
-description: "Getting Disney Pixel RPG's asset encryption key"
+description: "Getting Disney Pixel RPG's asset encryption key through reverse engineering"
 date: 2024-10-12T22:00:00-04:00
 categories:
   - Reverse Engineering
@@ -9,6 +9,7 @@ tags:
   - DP-RPG
   - IL2CPPDumper
   - Encryption
+  - iOS
 classes: wide
 header:
   og_image: /assets/images/drpg-enc/Title_logo.jpg
@@ -24,7 +25,7 @@ The game was available to download on Oct 6th, but the actual server would launc
 
 <img src="{{ site.url }}{{ site.baseurl }}/assets/images/drpg-enc/Pasted image 20241011120745.png" alt="">
 
-Well hmm that's annoying. CrackProof makes things like editing the APK really annoying, so using something like [apk-mitm](https://github.com/niklashigi/apk-mitm) was out of the window. Quite a few people also reported that the game would crash for as little as having USB Debugging enabled in Developer Settings (Apparently this was fixed in an update?). Either way, I decided just to look at the IL2CPP info first to see what I can get. Let's just see what [IL2CPPDumper](https://github.com/Perfare/Il2CppDumper) can do.
+Well hmm that's annoying. CrackProof makes things like editing the APK really annoying, so using something like [apk-mitm](https://github.com/niklashigi/apk-mitm) was out of the window. Quite a few people also reported that the game would crash for as little as having USB Debugging enabled in Developer Settings. (Apparently this was fixed in an update though?) Either way, I decided just to look at the IL2CPP info first to see what I can get. Let's just see what [IL2CPPDumper](https://github.com/Perfare/Il2CppDumper) can do.
 
 <img src="{{ site.url }}{{ site.baseurl }}/assets/images/drpg-enc/Pasted image 20241011115603.png" alt="">
 
@@ -55,8 +56,6 @@ Nice! Now we are ready for when the game launches to use Mitmproxy on the iOS ve
 
 With Mitmproxy, it was very easy to see all the traffic that the game sent to the API server. The API used standard msgpack with keys still attached. There was no certificate pinning or encryption that can be seen here so that makes things quite a bit more simpler. One of the endpoints of interest to me was `api/init/get_version` which would return the addressable JSONs for the latest version.
 
-{insert image of mitm packet}
-
 I went to look at the file to find the download links that the game uses, but when I went to look at the bundle used for the master files of the game, it turns out it was encrypted as the UnityFS header was missing. Interestingly, only some of the bundles were actually encrypted. Some of them still had the standard Unity header and could be loaded in tools such as [AssetStudio](https://github.com/Perfare/AssetStudio), but assets for the characters, enemies, and master files were encrypted with some of them having `enc` in the file name.
 
 <img src="{{ site.url }}{{ site.baseurl }}/assets/images/drpg-enc/Pasted image 20241011151256.png" alt="">
@@ -79,7 +78,7 @@ After a while, I started to retrace my steps and went back to the addressable JS
 <img src="{{ site.url }}{{ site.baseurl }}/assets/images/drpg-enc/Pasted image 20241011175157.png" alt="">
 
 `UnityEngine.ResourceManagement.ResourceProviders.AESStreamProcessor`?? Huh???
-This is the first time I've ever seen some sort of AES encryption for assets in the `UnityEngine` namespace. Usually developers make their own functions in the normal Assembly-Csharp DLL, but this time, I actually had to look into some `UnityEngine` functions. I wonder if the developers have Unity's source code to be able to do something like this at a deep level. 🤔
+This is the first time I've ever seen some sort of AES encryption for assets in the `UnityEngine` namespace. Usually developers make their own functions in the normal Assembly-Csharp DLL, but this time, I actually had to look into some `UnityEngine` functions. I wonder if the developers have Unity's source code to be able to do something like this at a deep level 🤔.
 But I digress, time to get back to RE. So now that we know where to look, I started to notice some interesting functions in two different areas: In `Assembly-Csharp.dll`, there is an `AddressableTangle` class, while in `Unity.ResourceManager`, there are also a few functions related to keys.
 
 <img src="{{ site.url }}{{ site.baseurl }}/assets/images/drpg-enc/image.png" alt="">
@@ -110,6 +109,7 @@ Success! We got a perfect decryption! We can now look at the assets that they wa
 <img src="{{ site.url }}{{ site.baseurl }}/assets/images/drpg-enc/Pasted image 20241011183006.png" alt="">
 
 Honestly I was really proud with this result. Even if it's not the most complex system in the world, I was happy that I was able to find and crack the encryption for this game almost entirely on my own, even if I did need to some help near the end 😅
+
 I did feel myself getting a lot better at IDA with this though :>
 
 Maybe I should try cracking the Chronos file next...
