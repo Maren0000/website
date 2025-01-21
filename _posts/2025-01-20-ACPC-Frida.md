@@ -23,12 +23,11 @@ People quickly figured out that the game had two files that were related to the 
 ## IDA Reversing
 
 I looked into [how you can use il2cppdumper and IDA to get decompiled psudocode for Unity games before](https://maren0000.github.io/website/reverse%20engineering/Breaking-DRPG/), so I won't go over this that process again here. After looking through a bunch of the game's classes in DnSpy, I eventually found a class named `CmpsLocalPlayerStorage` that seemed to be exactly what I was looking for as it has two save file paths and a nested `XorCryptor` class.
-
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250117143112.png" alt="">
+{% include figure popup=true image_path="/assets/images/acpc-frida/Pasted image 20250117143112.png" alt="" caption="DnSpy screenshot of CmpsLocalPlayerStorage class." %}
 
 Seems like there is a handy `GenerateKey` function we can take a look at! Let's see what it looks like in IDA.
 
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250117144204.png" alt="">
+{% include figure popup=true image_path="/assets/images/acpc-frida/Pasted image 20250117144204.png" alt="" caption="IDA decomp of GenerateKey method" %}
 
 Ah, well this is annoying. Unlike Pixel RPG which stored it's key as a string in Unity, ACPC seems to create a 1000 byte key at runtime using a set of Randomness functions inside the `RandomCore` class. The `Initialize` function has a set seed (`0x8A91F2BE48CCLL`) so that the final output will always be consistent every time the game is booted up, and then the game does `get_Int` from the randomness class until the 1000 byte array is filled out.
 Now, it is possible to recreate the Random functions used here by looking at the psudocode and making your own code based on that. The first person who got the key did end up doing exactly that, but since I'm not *that* good at interpreting psudocode, I decided to see if there was another possible method to getting the key. This is where Frida and the il2cpp-Frida-Bridge projects come in.
@@ -39,7 +38,7 @@ First thing to do is get [Frida](https://frida.re/) working on either an Android
 
 Since Frida on Android was failing for my use case, I ended up seeing if it was possible to use Frida on my iPad. Since it was not jailbroken, I couldn't use frida-server, but I eventually found [this tutorial on using Frida on non-jailbroken devices](https://infosecwriteups.com/unlocking-potential-exploring-frida-objection-on-non-jailbroken-devices-without-application-ed0367a84f07). I followed all the steps, and to my surprise it actually worked! Frida could hook into the game without issue!
 
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250119171502.png" alt="">
+{% include figure popup=true image_path="/assets/images/acpc-frida/Pasted image 20250119171502.png" alt="" caption="Frida is alive!" %}
 
 There is an issue with this method however, and that is you must sideload the game using [Sideloadly](https://sideloadly.io/) for Frida to work properly. There are a few downsides to this such as being able to only have 3 apps installed at once and a 7 day expiry date with a free Apple developer account, but the biggest issue is that you must have a decrypted IPA for Sideloadly to be able to install the IPA. Now although I don't have a jailbreak on my iPad, I do have the [TrollStore](https://ios.cfw.guide/installing-trollstore/) app installed which allows me to use an app like AppsDump2 to get a decrypted version of ACPC right from my device. So while this wasn't a huge issue for me, it could be harder to find a decrypted version of the app you want to hook into if you can't dump it yourself.
 
@@ -100,11 +99,12 @@ Il2Cpp.perform(() => {
 
 Then we can build the Frida script using `esbuild` command shown previously. Once we have the .js file, we can run it with Frida using this command: `frida -U -f <app_name> -l <script_name>.js`. You might need to use `%reload` command in the Frida console since `UnityFramework` might not be found on boot, but after that your script should run, and you should start seeing an output in the console log!
 
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118125712.png" alt="">
+{% include figure popup=true image_path="/assets/images/acpc-frida/Pasted image 20250118125712.png" alt="" caption="Screenshot of the TS code and console output" %}
 
 We can then convert this byte array to a hex key and then be able to decrypt the save file!
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118130201.png" alt="">
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118130648.png" alt="">
+
+{% include figure popup=true image_path="/assets/images/acpc-frida/Pasted image 20250118130201.png" alt="" caption="The key in hex" %}
+{% include figure popup=true image_path="/assets/images/acpc-frida/Pasted image 20250118130648.png" alt="" caption="Cyberchef screenshot of the save file after XOR decrypting with the key" %}
 
 The file has be successfully decrypted. But that's not the only thing we can do with the il2cpp-bridge. I won't go too much into it here and I would recommend you check the [code snippets page](https://github.com/vfsfitvnm/frida-il2cpp-bridge/wiki/Snippets) and the issues/discussions pages on the GitHub page as there is plenty of more info to be found there, but here are a few interesting screenshots of my own code snippets and console logs to show a bit of what's possible.
 
