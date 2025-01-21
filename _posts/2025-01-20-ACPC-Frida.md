@@ -92,8 +92,8 @@ Il2Cpp.perform(() => {
     const AssemblyCSharp = Il2Cpp.domain.assembly("Assembly-CSharp").image //Assembly-CSharp.dll
     const LocalPlayerStorageClass = AssemblyCSharp.class("NDcube.Cmps.Sys.CmpsLocalPlayerStorage") //Find CmpsLocalPlayerStorage class
     const XorClass = LocalPlayerStorageClass.nested("XorCryptor");
-    const key = XorClass.method("GenerateKey").invoke(); //Invoke GenerateKey method and store returned byte
-    console.log("key: ", key); //Print byte
+    const key = XorClass.method("GenerateKey").invoke(); //Invoke GenerateKey method and store returned byte array
+    console.log("key: ", key); //Print byte array
 });
 {% endhighlight %}
 
