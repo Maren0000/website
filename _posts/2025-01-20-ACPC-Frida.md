@@ -52,7 +52,7 @@ Now that we finally have a Frida setup working, we can look at the second piece 
 
 {% highlight powershell linenos %}
 git clone https://github.com/oleavr/frida-agent-example.git #Download Agent Example
-cd .\frida-agent-example # Change directory
+cd .\frida-agent-example #Change directory
 npm install -g typescript #Install typescript
 npm install #Install deps
 npm install --save-dev frida-il2cpp-bridge #Install frida-il2cpp-bridge
@@ -91,7 +91,6 @@ Process.getModuleByName("UnityFramework"); //Find the Unity executable
 Il2Cpp.perform(() => {
     console.log(Il2Cpp.unityVersion);
     const AssemblyCSharp = Il2Cpp.domain.assembly("Assembly-CSharp").image //Assembly-CSharp.dll
-    const AssemblyCSharpFirst = Il2Cpp.domain.assembly("Assembly-CSharp-firstpass").image
     const LocalPlayerStorageClass = AssemblyCSharp.class("NDcube.Cmps.Sys.CmpsLocalPlayerStorage") //Find CmpsLocalPlayerStorage class
     const XorClass = LocalPlayerStorageClass.nested("XorCryptor");
     const key = XorClass.method("GenerateKey").invoke(); //Invoke GenerateKey method and store returned byte
@@ -109,21 +108,13 @@ We can then convert this byte array to a hex key and then be able to decrypt the
 
 The file has be successfully decrypted. But that's not the only thing we can do with the il2cpp-bridge. I won't go too much into it here and I would recommend you check the [code snippets page](https://github.com/vfsfitvnm/frida-il2cpp-bridge/wiki/Snippets) and the issues/discussions pages on the GitHub page as there is plenty of more info to be found there, but here are a few interesting screenshots of my own code snippets and console logs to show a bit of what's possible.
 
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118134144.png" alt="">
+{% include figure popup=true image_path="/assets/images/acpc-frida/Pasted image 20250118134144.png" alt="" caption="Tracing a bunch of function calls with arguments and returns" %}
 
-Tracing a bunch of function calls with arguments and returns
+{% include figure popup=true image_path="/assets/images/acpc-frida/Pasted image 20250118134230.png" alt="" caption="Backtracing a method" %}
 
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118134230.png" alt="">
+{% include figure popup=true image_path="/assets/images/acpc-frida/Pasted image 20250118134406.png" alt="" caption="Invoking a method with custom values" %}
 
-Backtracing a method
-
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118134406.png" alt="">
-
-Invoking a method with custom values
-
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/acpc-frida/Pasted image 20250118134824.png" alt="">
-
-Creating a new instance of a class and using a custom method implementation to print a values in a struct each time the method is called
+{% include figure popup=true image_path="/assets/images/acpc-frida/Pasted image 20250118134824.png" alt="" caption="Creating a new instance of a class and using a custom method implementation to print a values in a struct each time the method is called" %}
 
 ## Conclusion
 
